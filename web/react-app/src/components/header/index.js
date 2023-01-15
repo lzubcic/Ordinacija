@@ -46,7 +46,7 @@ const Header = ({ currentUser }) => {
       <StyledContainer className="d-flex container">
         <h1>
           <Link style={linkStyle} to="/">
-            ZUBcic
+            Dental Clinic
           </Link>
         </h1>
 
