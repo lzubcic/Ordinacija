@@ -8,7 +8,8 @@ import Register from "./components/register";
 import {authenticationService} from "./services/authentication.service";
 import Header from "./components/header";
 import Profile from "./components/profile";
-import Users from "./components/admin/users";
+import News from "./components/news";
+import {Admin} from "./components/admin";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -28,8 +29,8 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/registration" component={Register} />
             <Route path="/profile" component={Profile} />
-            <Route path="/users" component={Users} />
-            {/*<Route path="/admin" component={Admin} />*/}
+            <Route path="/news" component={News} />
+            <Route path="/admin" component={Admin} />
           </Switch>
         </div>
       </Router>

@@ -5,11 +5,9 @@ import hr.zubcic.ordinacija.model.News;
 import hr.zubcic.ordinacija.repositories.NewsRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -35,7 +33,7 @@ public class NewsServiceImpl implements NewsService {
     public Optional<News> save(NewsCommand command) {
         News news = mapCommandToNews(command);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-        LocalDateTime date = LocalDateTime.parse(formatter.format(LocalDateTime.now()), formatter);
+        String date = formatter.format(LocalDateTime.now());
         news.setDate(date);
 
         newsRepository.save(news);

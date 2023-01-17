@@ -77,11 +77,16 @@ const Header = ({ currentUser }) => {
           )}
           {user?.auth === "ROLE_ADMIN" && (
               <li style={liStyle}>
-                <Link style={linkStyle} to="/users">
+                <Link style={linkStyle} to="/admin/users">
                   Users
                 </Link>
               </li>
           )}
+          <li style={liStyle}>
+            <Link style={linkStyle} to="/news">
+              News
+            </Link>
+          </li>
           <li style={liStyle}>
             <Link style={linkStyle} to="/about">
               About

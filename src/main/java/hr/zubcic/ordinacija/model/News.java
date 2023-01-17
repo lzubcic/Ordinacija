@@ -2,7 +2,6 @@ package hr.zubcic.ordinacija.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "news")
@@ -22,7 +21,7 @@ public class News {
 
     @NotNull
     @Column(name = "date")
-    private LocalDateTime date;
+    private String date;
 
     @Column(name = "image")
     private String image;
@@ -51,11 +50,11 @@ public class News {
         this.description = description;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
