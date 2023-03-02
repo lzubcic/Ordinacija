@@ -1,37 +1,44 @@
+import styled from "styled-components";
+
+const StyledImage = styled.img`
+  border-radius: 15%;
+  margin-bottom: 16px;
+`;
+
 const About = () => {
+  const aboutText = `
+    We are a team of experienced dental professionals dedicated to providing the highest quality dental care to our patients. Our clinic 
+    is equipped with state-of-the-art technology and equipment to ensure that you receive the most advanced and effective treatment available.
 
-    const aboutText = `
-    With energy for dentistry, Dr.Ryan Reynolds began ‘Dental clinic’ in Boston in 1982 spreading over five
-    dental focuses and a dental research facility crosswise over Stockholm.
+    Our mission is to help our patients achieve optimal oral health and beautiful smiles that they can be proud of. We understand that 
+    visiting the dentist can be a stressful experience for many people, which is why we prioritize patient comfort and care. From the 
+    moment you walk through our doors, our friendly and knowledgeable staff will make you feel welcome and at ease.
 
-    Concentrated on his vision of giving remarkable administrations in dentistry, Dr. Ryan extended to the UAE,
-    where he right now runs cutting-edge multispecialty dental clinics. Three of which are situated along Al Wasl
-    Road (Umm Suqeim) and one in Jumeirah.
+    Our dental services cover a wide range of treatments, including preventative care, restorative dentistry, cosmetic dentistry, and more. 
+    Whether you need a routine cleaning or a complex procedure, we have the skills and expertise to provide you with the best possible care.
 
-    Since its introduction to the world in Dubai in 1998, ‘Dental clinic’ has fabricated a fortunate place
-    in the business as a standout amongst the most confided in dental social insurance suppliers in the locale.
+    We believe that education is key to maintaining good oral health, which is why we take the time to educate our patients on proper dental 
+    hygiene and preventative care techniques. We are committed to helping our patients achieve long-term oral health and we will work with you 
+    to develop a customized treatment plan that meets your unique needs.
 
-    Consistent with its notoriety, ‘Dental clinic’ has grown multiple times in the course of the most recent
-    fifteen years with a profoundly dedicated group of specialists serving in excess of 50,000 patients to date.
-    `
+    At our dental clinic, we are passionate about helping our patients achieve beautiful, healthy smiles. If you are looking for a trusted 
+    dental provider, we invite you to schedule an appointment with us today. We look forward to meeting you and helping you achieve your oral 
+    health goals.
+    `;
 
-    return (
-        <div className="container">
-            <h1 className="mt-3">Learn more about us...</h1>
+  return (
+    <div className="container text-center">
+      <h1 className="mt-3">Welcome to our dental clinic!</h1>
 
-            <section>
-                <p style={{ display: "block", whiteSpace: "pre-wrap" }}>
-                    {aboutText}
-                </p>
-                <img
-                    style={{ borderRadius: "15%" }}
-                    src="https://www.milesight.com/structure/image/press/case-study/primadent-dental-clinic/cover.png"
-                    alt="building"
-                />
-            </section>
-
-        </div>
-    )
-}
+      <section>
+        <p style={{ display: "block", whiteSpace: "pre-wrap" }}>{aboutText}</p>
+        <StyledImage
+          src="https://www.milesight.com/structure/image/press/case-study/primadent-dental-clinic/cover.png"
+          alt="building"
+        />
+      </section>
+    </div>
+  );
+};
 
 export default About;
