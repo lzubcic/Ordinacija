@@ -83,6 +83,11 @@ const Header = ({ currentUser }) => {
               </li>
           )}
           <li style={liStyle}>
+            <Link style={linkStyle} to="/contact">
+              Contact us
+            </Link>
+          </li>
+          <li style={liStyle}>
             <Link style={linkStyle} to="/news">
               News
             </Link>

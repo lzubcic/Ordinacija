@@ -10,6 +10,8 @@ import Header from "./components/header";
 import Profile from "./components/profile";
 import News from "./components/news";
 import {Admin} from "./components/admin";
+import About from "./components/about";
+import Contact from "./components/contact";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -31,6 +33,8 @@ function App() {
             <Route path="/profile" component={Profile} />
             <Route path="/news" component={News} />
             <Route path="/admin" component={Admin} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
           </Switch>
         </div>
       </Router>
