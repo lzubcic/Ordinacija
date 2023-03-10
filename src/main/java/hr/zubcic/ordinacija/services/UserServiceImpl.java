@@ -77,6 +77,19 @@ public class UserServiceImpl implements UserService {
         return Optional.of(id);
     }
 
+    @Override
+    public User mapDTOToUser(final UserDTO dto) {
+        User user = new User();
+
+        user.setId(dto.getId());
+        user.setUsername(dto.getUsername());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setAuthorities(dto.getAuthorities().stream().map(Authority::new).collect(Collectors.toSet()));
+
+        return user;
+    }
+
     private UserDTO mapUserToDTO(final User user){
         UserDTO userDTO = new UserDTO();
 

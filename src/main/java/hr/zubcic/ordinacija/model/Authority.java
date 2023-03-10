@@ -9,6 +9,10 @@ import java.io.Serializable;
 @Table(name = "authority")
 public class Authority implements Serializable {
 
+    public Authority(String name) {
+        this.name = name;
+    }
+
     @Serial //mozda nes strga
     private static final long serialVersionUID = 1L;
 
@@ -19,6 +23,9 @@ public class Authority implements Serializable {
     @NotNull
     @Column
     private String name;
+
+    public Authority() {
+    }
 
     public String getName() {
         return name;

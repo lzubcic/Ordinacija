@@ -2,6 +2,7 @@ package hr.zubcic.ordinacija.services;
 
 import hr.zubcic.ordinacija.dto.UserDTO;
 import hr.zubcic.ordinacija.dto.command.UserCommand;
+import hr.zubcic.ordinacija.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,6 @@ public interface UserService {
     Optional<UserDTO> findByUsername(String username);
     Optional<UserDTO> save(UserCommand command);
     Optional<UserDTO> update(Long id, UserCommand updateUser);
-
     Optional<Long> delete(Long id);
+    User mapDTOToUser(UserDTO dto);
 }
