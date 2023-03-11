@@ -17,10 +17,10 @@ const getAllUsers = () => {
     headers: authenticationService.authHeader(),
   };
   return fetch(
-      `${authenticationService.apiUrl}/api/users`,
-      requestOptions
+    `${authenticationService.apiUrl}/api/users`,
+    requestOptions
   ).then(authenticationService.handleResponse);
-}
+};
 
 const addUser = (username, password, firstName, lastName) => {
   const requestOptions = {
@@ -47,7 +47,10 @@ const updateUser = (id, username, password, firstName, lastName) => {
     body: JSON.stringify({ id, username, password, firstName, lastName }),
   };
 
-  return fetch(`${authenticationService.apiUrl}/api/users/${id}`, requestOptions)
+  return fetch(
+    `${authenticationService.apiUrl}/api/users/${id}`,
+    requestOptions
+  )
     .then(authenticationService.handleResponse)
     .then((user) => {
       return user;
@@ -59,11 +62,14 @@ const deleteUser = (id) => {
     method: "DELETE",
     headers: authenticationService.authHeader(),
   };
-  return fetch(`${authenticationService.apiUrl}/api/users/${id}`, requestOptions)
-      .then(authenticationService.handleResponse)
-      .then((user) => {
-        return user;
-      });
+  return fetch(
+    `${authenticationService.apiUrl}/api/users/${id}`,
+    requestOptions
+  )
+    .then(authenticationService.handleResponse)
+    .then((user) => {
+      return user;
+    });
 };
 
 export const userService = {

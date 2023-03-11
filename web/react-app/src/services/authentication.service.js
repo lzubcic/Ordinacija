@@ -14,6 +14,18 @@ const authHeader = () => {
   }
 };
 
+const authHeaderWithContentType = () => {
+  const currentUser = localStorage.getItem("token");
+  if (currentUser) {
+    return {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${currentUser}`,
+    };
+  } else {
+    return {};
+  }
+};
+
 // Response handler
 const handleResponse = (response) => {
   return response.text().then((text) => {
@@ -63,6 +75,7 @@ export const authenticationService = {
   login,
   logout,
   authHeader,
+  authHeaderWithContentType,
   handleResponse,
   currentUser: currentUserSubject.asObservable(),
   get currentUserValue() {

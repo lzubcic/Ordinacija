@@ -14,8 +14,13 @@ const Home = () => {
         }}
       >
         <div style={{ height: "88vh" }}>
-          <h1 style={{ paddingTop: "135px" }}>Welcome to Zubcic Dental Clinic!</h1>
-          <Link to="/appointments" className="btn btn-primary mx-3">
+          <h1 style={{ paddingTop: "135px" }}>
+            Welcome to Zubcic Dental Clinic!
+          </h1>
+          <Link
+            to={currentUser ? "/appointment" : "/login"}
+            className="btn btn-primary mx-3"
+          >
             Schedule na appointment 📆
           </Link>
           <Link to="/login" className="btn btn-success mx-3">

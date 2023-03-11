@@ -76,17 +76,26 @@ const Header = ({ currentUser }) => {
             </li>
           )}
           {user?.auth === "ROLE_ADMIN" && (
+            <>
               <li style={liStyle}>
                 <Link style={linkStyle} to="/admin/users">
                   Users
                 </Link>
               </li>
+              <li style={liStyle}>
+                <Link style={linkStyle} to="/admin/appointments">
+                  Appointments
+                </Link>
+              </li>
+            </>
           )}
-          <li style={liStyle}>
-            <Link style={linkStyle} to="/contact">
-              Contact us
-            </Link>
-          </li>
+          {user?.auth !== "ROLE_ADMIN" && (
+            <li style={liStyle}>
+              <Link style={linkStyle} to="/contact">
+                Contact us
+              </Link>
+            </li>
+          )}
           <li style={liStyle}>
             <Link style={linkStyle} to="/news">
               News

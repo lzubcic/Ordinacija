@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/appointment")
+@RequestMapping("/api/appointment")
 @CrossOrigin(origins = "http://localhost:3000")
 public class AppointmentController {
 
@@ -72,7 +72,7 @@ public class AppointmentController {
                 );
     }
 
-    @PutMapping("{/id}")
+    @PutMapping("/{id}")
     public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO dto) {
         return appointmentService.update(id, dto)
                 .map(ResponseEntity::ok)
@@ -81,7 +81,7 @@ public class AppointmentController {
                 );
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
         return appointmentService.delete(id)
                 .map(ResponseEntity::ok)

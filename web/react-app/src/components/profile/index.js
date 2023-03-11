@@ -127,13 +127,12 @@ const Profile = () => {
       <hr />
       <h3 className="mb-4">Your appointments</h3>
 
-        <>
-          <p>You currently don't have any appointments.</p>
-          <Link to="/appointments" className="btn btn-success">
-            Schedule an appointment
-          </Link>
-        </>
-
+      <>
+        <p>You currently don't have any appointments.</p>
+        <Link to="/appointment" className="btn btn-success">
+          Schedule an appointment
+        </Link>
+      </>
     </div>
   );
 };
