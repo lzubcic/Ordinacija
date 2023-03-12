@@ -11,6 +11,17 @@ const getUser = () => {
   ).then(authenticationService.handleResponse);
 };
 
+const getById = (id) => {
+  const requestOptions = {
+    method: "GET",
+    headers: authenticationService.authHeader(),
+  };
+  return fetch(
+    `${authenticationService.apiUrl}/api/users/${id}`,
+    requestOptions
+  ).then((res) => res.json());
+};
+
 const getAllUsers = () => {
   const requestOptions = {
     method: "GET",
@@ -20,6 +31,34 @@ const getAllUsers = () => {
     `${authenticationService.apiUrl}/api/users`,
     requestOptions
   ).then(authenticationService.handleResponse);
+};
+
+const getAllDoctors = () => {
+  const requestOptions = {
+    method: "GET",
+    headers: authenticationService.authHeader(),
+  };
+  return fetch(`${authenticationService.apiUrl}/api/users`, requestOptions)
+    .then(authenticationService.handleResponse)
+    .then((users) =>
+      users.filter((user) =>
+        user.authorities.some((auth) => auth === "ROLE_DOCTOR")
+      )
+    );
+};
+
+const getAllPatients = () => {
+  const requestOptions = {
+    method: "GET",
+    headers: authenticationService.authHeader(),
+  };
+  return fetch(`${authenticationService.apiUrl}/api/users`, requestOptions)
+    .then(authenticationService.handleResponse)
+    .then((users) =>
+      users.filter((user) =>
+        user.authorities.some((auth) => auth === "ROLE_USER")
+      )
+    );
 };
 
 const addUser = (username, password, firstName, lastName) => {
@@ -75,6 +114,9 @@ const deleteUser = (id) => {
 export const userService = {
   getUser,
   getAllUsers,
+  getAllDoctors,
+  getAllPatients,
+  getById,
   addUser,
   updateUser,
   deleteUser,

@@ -26,14 +26,14 @@ public class AppointmentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AppointmentDTO>> getAppointments(@RequestParam(required = false) Long doctorId, @RequestParam(required = false) Long patientId) {
+    public ResponseEntity<List<AppointmentDTO>> getAppointments(@RequestParam(required = false) String doctorId, @RequestParam(required = false) String patientId) {
         if (doctorId != null) {
-            UserDTO doctorDTO = userService.findById(doctorId).get();
+            UserDTO doctorDTO = userService.findById(Long.parseLong(doctorId)).get();
             User doctor = userService.mapDTOToUser(doctorDTO);
             return ResponseEntity.status(HttpStatus.OK).body(appointmentService.findAllByDoctor(doctor));
         }
         else if (patientId != null) {
-            UserDTO patientDTO = userService.findById(patientId).get();
+            UserDTO patientDTO = userService.findById(Long.parseLong(patientId)).get();
             User patient = userService.mapDTOToUser(patientDTO);
             return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonList(appointmentService.findAppointmentByPatient(patient).get()));
         }
@@ -75,6 +75,24 @@ public class AppointmentController {
     @PutMapping("/{id}")
     public ResponseEntity<AppointmentDTO> update(@PathVariable Long id, @RequestBody AppointmentDTO dto) {
         return appointmentService.update(id, dto)
+                .map(ResponseEntity::ok)
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
+                );
+    }
+
+    @PutMapping("/{id}/accept")
+    public ResponseEntity<AppointmentDTO> accept(@PathVariable Long id) {
+        return appointmentService.accept(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
+                );
+    }
+
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<AppointmentDTO> cancel(@PathVariable Long id) {
+        return appointmentService.cancel(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(
                         () -> ResponseEntity.notFound().build()

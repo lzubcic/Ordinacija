@@ -19,6 +19,10 @@ public interface AppointmentService {
 
     Optional<AppointmentDTO> save(AppointmentDTO appointment);
 
+    Optional<AppointmentDTO> accept(Long id);
+
+    Optional<AppointmentDTO> cancel(Long id);
+
     Optional<AppointmentDTO> update(Long id, AppointmentDTO appointment);
 
     Optional<Long> delete(Long id);

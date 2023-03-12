@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { appointmentService } from "../../../services/appointment.service";
+import { formatDateString } from "../../../util/helper";
 import EditAppointment from "./EditAppointment";
 
 const Appointments = () => {
@@ -52,7 +53,7 @@ const Appointments = () => {
             <th scope="row">{appointment.id}</th>
             <td>{appointment.appointmentType}</td>
             <td>{appointment.appointmentStatus}</td>
-            <td>{appointment.schedule}</td>
+            <td>{formatDateString(appointment.schedule)}</td>
             <td>{appointment.description}</td>
             <td>
               <button

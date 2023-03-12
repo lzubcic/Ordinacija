@@ -1,21 +1,49 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import { appointmentService } from "../../services/appointment.service";
 
 import { userService } from "../../services/user.service";
+import { appointmentTypes } from "../../util/consts";
+import { formatDateString } from "../../util/helper";
 const Profile = () => {
   const [user, setUser] = useState(null);
+  const [appointment, setAppointment] = useState(null);
+  const [doctor, setDoctor] = useState(null);
 
   useEffect(() => {
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    fetchAppointments();
+  }, [user]);
+
+  useEffect(() => {
+    fetchDoctor();
+  }, [appointment]);
 
   const fetchUser = async () => {
     const fetchedUser = await userService.getUser();
     const user = await fetchedUser;
 
     setUser(user);
+  };
+
+  const fetchAppointments = () => {
+    if (user) {
+      appointmentService
+        .getByPatientId(user?.id)
+        .then((apps) => setAppointment(apps[0]));
+    }
+  };
+
+  const fetchDoctor = () => {
+    if (appointment) {
+      userService.getById(appointment.doctorId).then((doc) => setDoctor(doc));
+    }
   };
 
   return (
@@ -125,14 +153,28 @@ const Profile = () => {
         )}
       </Formik>
       <hr />
-      <h3 className="mb-4">Your appointments</h3>
-
-      <>
-        <p>You currently don't have any appointments.</p>
-        <Link to="/appointment" className="btn btn-success">
-          Schedule an appointment
-        </Link>
-      </>
+      <h3 className="mb-4">Your appointment</h3>
+      {appointment ? (
+        <Card style={{ width: "18rem" }}>
+          <Card.Body>
+            <Card.Title>{`${
+              appointmentTypes.find(
+                (at) => at.value === appointment.appointmentType
+              ).name
+            } at ${formatDateString(appointment.schedule)}`}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">{`Doctor: ${doctor?.firstName} ${doctor?.lastName}`}</Card.Subtitle>
+            <Card.Text>{appointment.description}</Card.Text>
+            <Card.Footer>Status: {appointment.appointmentStatus}</Card.Footer>
+          </Card.Body>
+        </Card>
+      ) : (
+        <>
+          <p>You currently don't have an appointment.</p>
+          <Link to="/appointment" className="btn btn-success">
+            Schedule an appointment
+          </Link>
+        </>
+      )}
     </div>
   );
 };

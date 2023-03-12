@@ -89,10 +89,17 @@ const Header = ({ currentUser }) => {
               </li>
             </>
           )}
-          {user?.auth !== "ROLE_ADMIN" && (
+          {user?.auth !== ("ROLE_ADMIN" || "ROLE_DOCTOR") && (
             <li style={liStyle}>
               <Link style={linkStyle} to="/contact">
                 Contact us
+              </Link>
+            </li>
+          )}
+          {user?.auth === "ROLE_DOCTOR" && (
+            <li style={liStyle}>
+              <Link style={linkStyle} to="/appointments">
+                Appointments
               </Link>
             </li>
           )}

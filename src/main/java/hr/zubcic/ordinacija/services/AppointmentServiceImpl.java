@@ -2,6 +2,7 @@ package hr.zubcic.ordinacija.services;
 
 import hr.zubcic.ordinacija.dto.AppointmentDTO;
 import hr.zubcic.ordinacija.model.Appointment;
+import hr.zubcic.ordinacija.model.AppointmentStatus;
 import hr.zubcic.ordinacija.model.User;
 import hr.zubcic.ordinacija.repositories.AppointmentRepository;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,22 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Optional<AppointmentDTO> save(AppointmentDTO dto) {
         Appointment appointment = mapDTOToAppointment(dto);
+        appointmentRepository.save(appointment);
+        return Optional.of(mapAppointmentToDTO(appointment));
+    }
+
+    @Override
+    public Optional<AppointmentDTO> accept(Long id) {
+        Appointment appointment = appointmentRepository.findById(id).get();
+        appointment.setAppointmentStatus(AppointmentStatus.SCHEDULED);
+        appointmentRepository.save(appointment);
+        return Optional.of(mapAppointmentToDTO(appointment));
+    }
+
+    @Override
+    public Optional<AppointmentDTO> cancel(Long id) {
+        Appointment appointment = appointmentRepository.findById(id).get();
+        appointment.setAppointmentStatus(AppointmentStatus.CANCELED);
         appointmentRepository.save(appointment);
         return Optional.of(mapAppointmentToDTO(appointment));
     }
@@ -98,12 +115,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     private LocalDateTime formatDate(String strDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         return LocalDateTime.parse(strDate, formatter);
     }
 
     private String dateToString(LocalDateTime date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime dateTime = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), date.getHour(), date.getMinute());
         return dateTime.format(formatter);
     }

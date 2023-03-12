@@ -17,7 +17,8 @@ import News from "./components/news";
 import { Admin } from "./components/admin";
 import About from "./components/about";
 import Contact from "./components/contact";
-import Appointment from "./components/appointment";
+import BookAppointment from "./components/appointment/BookAppointment";
+import DoctorAppointments from "./components/appointment/DoctorAppointments";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -41,7 +42,8 @@ function App() {
           <Route path="/admin" component={Admin} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
-          <Route path="/appointment" component={Appointment} />
+          <Route path="/appointment" component={BookAppointment} />
+          <Route path="/appointments" component={DoctorAppointments} />
         </Switch>
       </div>
     </Router>

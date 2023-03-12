@@ -54,7 +54,7 @@ const addAppointment = (
 ) => {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-type": "application/json" },
+    headers: authenticationService.authHeaderWithContentType(),
     body: JSON.stringify({
       appointmentType,
       appointmentStatus,
@@ -108,6 +108,38 @@ const updateAppointment = (
     });
 };
 
+const acceptAppointment = (id) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: authenticationService.authHeader(),
+  };
+
+  return fetch(
+    `${authenticationService.apiUrl}/api/appointment/${id}/accept`,
+    requestOptions
+  )
+    .then(authenticationService.handleResponse)
+    .then((appointment) => {
+      return appointment;
+    });
+};
+
+const cancelAppointment = (id) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: authenticationService.authHeader(),
+  };
+
+  return fetch(
+    `${authenticationService.apiUrl}/api/appointment/${id}/cancel`,
+    requestOptions
+  )
+    .then(authenticationService.handleResponse)
+    .then((appointment) => {
+      return appointment;
+    });
+};
+
 const deleteAppointment = (id) => {
   const requestOptions = {
     method: "DELETE",
@@ -131,5 +163,7 @@ export const appointmentService = {
   getByPatientId,
   addAppointment,
   updateAppointment,
+  acceptAppointment,
+  cancelAppointment,
   deleteAppointment,
 };
